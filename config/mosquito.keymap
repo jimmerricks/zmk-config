@@ -2,8 +2,8 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is the keymap for the Midge keyboard.
- * Last edited by James White, September 22, 2021.
+ * This is the oneshot keymap for the Midge keyboard.
+ * Last edited by James White, October 19, 2021.
  */
 
 #include <behaviors.dtsi>
@@ -18,19 +18,15 @@
 #define NUM_L 1
 #define NAV_L 2
 
-&lt { quick_tap_ms = <0>; };
+&sl {
+    release-after-ms = <1000>;
+};
+&sk {
+    release-after-ms = <1000>;
+};
 
 / {
     behaviors {
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            label = "homerow mods";
-            #binding-cells = <2>;
-            tapping_term_ms = <220>;
-            quick_tap_ms = <180>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
         f111: f_one_eleven {
             compatible = "zmk,behavior-mod-morph";
             label = "F1 F11";
@@ -317,9 +313,9 @@
         default_layer {
             bindings = <
                             &kp Q       &kp W       &kp F       &kp P       &kp B           &kp K       &kp L       &kp U       &kp Y       &kp X
-                &kp MINUS   &hm LGUI A  &hm LALT R  &hm LCTRL S &hm LSHFT T &kp G           &kp M       &hm LSHFT N &hm LCTRL E &hm LALT I  &hm LGUI O &kp QUOT
-                                        &hm RALT V  &kp C       &kp D       &kp Z           &kp J       &kp H       &kp COMMA   &hm RALT DOT
-                                                              &lt NAV_L ESC &kp SPACE       &kp BSPC    &lt NUM_L RET
+                &kp ESC     &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O      &kp RET
+                                        &kp V       &kp C       &kp D       &kp Z           &kp J       &kp H       &kp COMMA   &kp DOT
+                                                                &sl 2       &kp SPACE       &kp BSPC    &sl 1
             >;
         };
 
@@ -327,8 +323,8 @@
             label = "Num";
             bindings = <
                             &kp SLASH   &kp N7      &kp N8      &kp N9      &kp ASTRK       &trans      &trans      &trans      &trans     &trans
-                &trans      &kp MINUS   &kp N4      &kp N5      &kp N6      &kp PLUS        &trans      &trans      &trans      &trans     &trans      &trans
-                                        &kp N1      &kp N2      &kp N3      &trans          &trans      &trans      &trans      &trans
+                &trans      &kp MINUS   &kp N4      &kp N5      &kp N6      &kp PLUS        &trans      &sk LSHFT   &sk LCTRL   &sk LALT   &sk LGUI    &trans
+                                        &kp N1      &kp N2      &kp N3      &trans          &trans      &kp LS(RSHFT) &kp LC(RCTRL) &sk RALT
                                                                 &kp DOT     &kp N0          &trans      &trans
             >;
         };
@@ -337,9 +333,9 @@
             label = "Nav";
             bindings = <
                             &trans      &trans      &trans      &trans      &trans          &kp PG_UP   &kp HOME    &kp UARW    &kp END    &kp LC(Z)
-                &trans      &trans      &trans      &trans      &trans      &trans          &kp PG_DN   &kp LARW    &kp DARW    &kp RARW   &kp LC(LS(Z)) &trans
-                                        &trans      &trans      &trans      &trans          &trans      &kp ESC     &kp TAB     &kp RET
-                                                                &trans      &trans          &kp DEL     &kp LS(INS)
+                &trans      &sk LGUI    &sk LALT    &sk LCTRL   &sk LSHFT   &trans          &kp PG_DN   &kp LARW    &kp DARW    &kp RARW   &kp LC(LS(Z)) &kp LS(INS)
+                                        &sk RALT    &kp LC(RCTRL) &kp LS(RSHFT) &trans      &trans      &kp ESC     &kp TAB     &kp RET
+                                                                &trans      &trans          &trans      &kp DEL
             >;
         };
 
