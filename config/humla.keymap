@@ -2,8 +2,8 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is the oneshot keymap for the Midge keyboard.
- * Last edited by James White, October 21, 2021.
+ * This is a Colemak FZX oneshot keymap for the Humla keyboard.
+ * Last edited by James White, October 24, 2021.
  */
 
 #include <behaviors.dtsi>
@@ -27,6 +27,14 @@
 
 / {
     behaviors {
+        qs: quick_sticky {
+            compatible = "zmk,behavior-sticky-key";
+            label = "quick sticky";
+            #binding-cells = <1>;
+            release-after-ms = <1000>;
+            bindings = <&kp>;
+            quick-release;
+        };
         f111: f_one_eleven {
             compatible = "zmk,behavior-mod-morph";
             label = "F1 F11";
@@ -312,20 +320,20 @@
 
         default_layer {
             bindings = <
-                            &kp Q       &kp W       &kp F       &kp P       &kp B           &kp K       &kp L       &kp U       &kp Y       &kp X
-                            &kp A       &kp R       &kp S       &kp T       &kp G           &kp M       &kp N       &kp E       &kp I       &kp O
-                            &kp ESC     &kp V       &kp C       &kp D       &kp Z           &kp J       &kp H       &kp COMMA   &kp DOT      &kp RET
-                                                    &sl 2       &kp SPACE   &kp ESC         &kp RET     &sk LSHFT   &sl 1
+                            &kp APOS    &kp Q       &kp W       &kp M       &kp K           &kp J       &kp F       &kp Z       &kp X       &kp FSLH
+                            &kp A       &kp R       &kp S       &kp T       &kp G           &kp P       &kp N       &kp E       &kp I       &kp O
+                            &kp COMMA   &kp L       &kp C       &kp D       &kp V           &kp B       &kp H       &kp U       &kp Y       &kp DOT
+                                                    &sl NAV_L   &kp SPACE   &kp ESC         &kp RET     &qs LSHFT   &sl NUM_L
             >;
         };
 
         num_layer {
             label = "Num";
             bindings = <
-                            &kp SLASH   &kp N7      &kp N8      &kp N9      &kp ASTRK       &trans      &kp LS(RSHFT) &kp LC(RCTRL) &kp LA(RALT) &kp LG(RGUI)
-                            &kp MINUS   &kp N4      &kp N5      &kp N6      &kp PLUS        &trans      &sk LSHFT   &sk LCTRL   &sk LALT   &sk LGUI
-                            &trans      &kp N1      &kp N2      &kp N3      &trans          &trans      &trans      &trans      &sk RALT    &trans
-                                                    &kp DOT     &kp N0      &trans          &trans      &trans      &trans
+                            &kp RA(N4)  &kp N7      &kp N8      &kp N9      &kp RA(N5)      &trans      &kp LS(RSHFT) &kp LC(RCTRL) &kp LA(RALT) &kp LG(RGUI)
+                            &kp SLASH   &kp N4      &kp N5      &kp N6      &kp ASTRK       &trans      &sk LSHFT   &sk LCTRL   &sk LALT   &sk LGUI
+                            &kp MINUS   &kp N1      &kp N2      &kp N3      &kp PLUS        &trans      &trans      &trans      &sk RALT    &trans
+                                                    &lt NAV_L DOT &kp N0    &trans          &trans      &trans      &trans
             >;
         };
 
@@ -334,8 +342,8 @@
             bindings = <
                             &kp LG(RGUI) &kp LA(RALT) &kp LC(RCTRL) &kp LS(RSHFT) &trans    &kp PG_UP   &kp HOME    &kp UARW    &kp END    &kp LC(Z)
                             &sk LGUI    &sk LALT    &sk LCTRL   &sk LSHFT   &trans          &kp PG_DN   &kp LARW    &kp DARW    &kp RARW   &kp LC(LS(Z))
-                            &trans      &sk RALT    &trans      &trans      &trans          &trans      &kp ESC     &kp TAB     &kp RET    &kp LS(INS)
-                                                    &trans      &trans      &trans          &trans      &kp BSPC    &kp DEL
+                            &trans      &sk RALT    &trans      &trans      &trans          &kp LC(C)   &kp ESC     &kp TAB     &kp RET    &kp LS(INS)
+                                                    &trans      &trans      &trans          &trans      &kp BSPC    &lt NUM_L DEL
             >;
         };
 
