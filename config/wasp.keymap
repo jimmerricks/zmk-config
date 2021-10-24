@@ -1,0 +1,30 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+
+&mt {
+    // flavor = "tap-preferred";
+    // tapping_term_ms = <200>;
+};
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+                
+        default_layer {
+            bindings = <
+                            &kp W &kp E &kp R &kp T        &kp Y &kp U &kp I &kp O
+                &kp Q &kp A &kp S &kp D &kp F &kp G        &kp H &kp J &kp K &kp L &kp SEMI &kp P
+                      &kp Z &kp X &kp C &kp V &kp B        &kp N &kp M &kp COMMA &kp DOT &kp FSLH
+                                      &kp ESC &kp SPACE    &kp BSPC &kp RET
+            >;
+        };
+    };
+};
