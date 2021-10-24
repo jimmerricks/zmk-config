@@ -3,12 +3,16 @@
  * SPDX-License-Identifier: MIT
  *
  * This is the keymap for the Midge keyboard.
- * Last edited by James White, September 22, 2021.
+ * Last edited by James White, October 21, 2021.
  */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+
+&kscan0 {
+    debounce-period = <10>;
+};
 
 #define DEF_L 0
 #define NUM_L 1
