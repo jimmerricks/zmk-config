@@ -11,6 +11,17 @@
 &lt { quick_tap_ms = <0>; };
 
 / {
+   combos {
+        compatible = "zmk,combos";
+        combo_f {
+            timeout-ms = <50>;
+            key-positions = <0 4>;
+            bindings = <&kp F>;
+        };
+    };
+};
+
+/ {
     keymap {
         compatible = "zmk,keymap";
 
