@@ -2,7 +2,7 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is a Colemak FZX oneshot keymap for the Mosquito keyboard.
+ * This is a Colemak DVBF oneshot keymap for the Mosquito keyboard.
  * Last edited by James White, October 24, 2021.
  */
 
@@ -320,9 +320,9 @@
 
         default_layer {
             bindings = <
-                            &kp ESC     &kp Q       &kp W       &kp M       &kp K           &kp J       &kp F       &kp Z       &kp X       &kp RET
+                            &kp ESC     &kp L       &kp C       &kp D       &kp V           &kp B       &kp F       &kp U       &kp Y       &kp RET
                 &kp COMMA   &kp A       &kp R       &kp S       &kp T       &kp G           &kp P       &kp N       &kp E       &kp I       &kp O      &kp DOT
-                                        &kp L       &kp C       &kp D       &kp V           &kp B       &kp H       &kp U       &kp Y
+                                        &kp Q       &kp W       &kp M       &kp K           &kp J       &kp H       &kp Z       &kp X
                                                                 &sl NAV_L   &kp SPACE       &qs LSHFT   &sl NUM_L
             >;
         };
