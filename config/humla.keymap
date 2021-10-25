@@ -2,7 +2,7 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is a Colemak FZX oneshot keymap for the Humla keyboard.
+ * This is a Colemak OA oneshot keymap for the Humla keyboard.
  * Last edited by James White, October 24, 2021.
  */
 
@@ -320,9 +320,9 @@
 
         default_layer {
             bindings = <
-                            &kp APOS    &kp Q       &kp W       &kp M       &kp K           &kp J       &kp F       &kp Z       &kp X       &kp FSLH
-                            &kp A       &kp R       &kp S       &kp T       &kp G           &kp P       &kp N       &kp E       &kp I       &kp O
-                            &kp COMMA   &kp L       &kp C       &kp D       &kp V           &kp B       &kp H       &kp U       &kp Y       &kp DOT
+                            &kp APOS    &kp L       &kp C       &kp M       &kp K           &kp J       &kp F       &kp U       &kp Y       &kp FSLH
+                            &kp O       &kp R       &kp S       &kp T       &kp G           &kp P       &kp N       &kp E       &kp I       &kp A
+                            &kp COMMA   &kp Q       &kp W       &kp D       &kp V           &kp B       &kp H       &kp Z       &kp X       &kp DOT
                                                     &sl NAV_L   &kp SPACE   &kp ESC         &kp RET     &qs LSHFT   &sl NUM_L
             >;
         };
