@@ -27,6 +27,14 @@
 
 / {
     behaviors {
+        nl: not_so_sticky_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky layer";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&sl>;
+        };
         qs: quick_sticky {
             compatible = "zmk,behavior-sticky-key";
             label = "quick sticky";
@@ -320,10 +328,10 @@
 
         default_layer {
             bindings = <
-                            &kp ESC     &kp L       &kp C       &kp D       &kp V           &kp B       &kp F       &kp U       &kp Y       &kp RET
+                            &kp ESC     &kp Q       &kp W       &kp M       &kp K           &kp J       &kp F       &kp U       &kp X       &kp RET
                 &kp COMMA   &kp A       &kp R       &kp S       &kp T       &kp G           &kp P       &kp N       &kp E       &kp I       &kp O      &kp DOT
-                                        &kp Q       &kp W       &kp M       &kp K           &kp J       &kp H       &kp Z       &kp X
-                                                                &sl NAV_L   &kp SPACE       &qs LSHFT   &sl NUM_L
+                                        &kp L       &kp C       &kp D       &kp V           &kp B       &kp H       &kp Z       &kp Y
+                                                                &nl NAV_L NAV_L &kp SPACE   &qs LSHFT   &nl NUM_L NUM_L
             >;
         };
 

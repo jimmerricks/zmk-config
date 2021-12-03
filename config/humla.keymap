@@ -2,8 +2,8 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is a Colemak OA oneshot keymap for the Humla keyboard.
- * Last edited by James White, October 24, 2021.
+ * This is a Colemak 28 oneshot keymap for the Humla keyboard.
+ * Last edited by James White, November 29, 2021.
  */
 
 #include <behaviors.dtsi>
@@ -27,13 +27,21 @@
 
 / {
     behaviors {
-        qs: quick_sticky {
-            compatible = "zmk,behavior-sticky-key";
-            label = "quick sticky";
-            #binding-cells = <1>;
-            release-after-ms = <1000>;
-            bindings = <&kp>;
-            quick-release;
+        nk: not_so_sticky_key {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky key";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&sk>;
+        };
+        nl: not_so_sticky_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky layer";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&sl>;
         };
         f111: f_one_eleven {
             compatible = "zmk,behavior-mod-morph";
@@ -108,6 +116,11 @@
     };
     combos {
         compatible = "zmk,combos";
+        combo_grave {
+            timeout-ms = <25>;
+            key-positions = <0 1>;
+            bindings = <&kp GRAVE>;
+        };
         combo_left_brace {
             timeout-ms = <25>;
             key-positions = <1 2>;
@@ -118,20 +131,26 @@
             key-positions = <2 3>;
             bindings = <&kp RBRC>;
         };
+        combo_underscore {
+            timeout-ms = <25>;
+            key-positions = <3 4>;
+            bindings = <&kp UNDER>;
+        };
         combo_left_parenthesis {
             timeout-ms = <25>;
             key-positions = <11 12>;
+            layers = <0>;
             bindings = <&kp LPAR>;
         };
         combo_right_parenthesis {
             timeout-ms = <25>;
             key-positions = <12 13>;
+            layers = <0>;
             bindings = <&kp RPAR>;
         };
         combo_minus {
             timeout-ms = <25>;
             key-positions = <13 14>;
-            layers = <0>;
             bindings = <&kp MINUS>;
         };
         combo_left_bracket {
@@ -144,31 +163,42 @@
             key-positions = <22 23>;
             bindings = <&kp RBKT>;
         };
-        combo_grave {
+        combo_plus {
+            timeout-ms = <25>;
+            key-positions = <5 6>;
+            bindings = <&kp PLUS>;
+        };
+        combo_semicolon {
             timeout-ms = <25>;
             key-positions = <6 7>;
-            bindings = <&kp GRAVE>;
+            bindings = <&kp SEMI>;
+        };
+        combo_colon {
+            timeout-ms = <25>;
+            key-positions = <7 8>;
+            bindings = <&kp COLON>;
         };
         combo_backslash {
             timeout-ms = <25>;
-            key-positions = <7 8>;
+            key-positions = <8 9>;
             bindings = <&kp BSLH>;
         };
         combo_equal {
             timeout-ms = <25>;
             key-positions = <15 16>;
-            layers = <0>;
             bindings = <&kp EQUAL>;
         };
-        combo_semicolon {
+        combo_comma {
             timeout-ms = <25>;
             key-positions = <16 17>;
-            bindings = <&kp SEMI>;
+            layers = <0>;
+            bindings = <&kp COMMA>;
         };
-        combo_colon {
+        combo_dot {
             timeout-ms = <25>;
             key-positions = <17 18>;
-            bindings = <&kp COLON>;
+            layers = <0>;
+            bindings = <&kp DOT>;
         };
         combo_apostrophe {
             timeout-ms = <25>;
@@ -179,6 +209,11 @@
             timeout-ms = <25>;
             key-positions = <27 28>;
             bindings = <&kp SLASH>;
+        };
+        combo_question_mark {
+            timeout-ms = <25>;
+            key-positions = <28 29>;
+            bindings = <&kp QUESTION>;
         };
         combo_f_one {
             timeout-ms = <25>;
@@ -308,11 +343,18 @@
         };
         combo_printscreen {
             timeout-ms = <25>;
-            key-positions = <32 33>;
+            key-positions = <31 34>;
             bindings = <&kp PSCRN>;
+        };
+        combo_shift_shift {
+            timeout-ms = <25>;
+            key-positions = <32 33>;
+            bindings = <&kp LS(RSHFT)>;
         };
     };
 };
+#define SL(KEY) &nl KEY KEY
+#define SK(KEY) &nk KEY KEY
 
 / {
     keymap {
@@ -320,30 +362,30 @@
 
         default_layer {
             bindings = <
-                            &kp APOS    &kp L       &kp C       &kp M       &kp K           &kp J       &kp F       &kp U       &kp Y       &kp FSLH
-                            &kp O       &kp R       &kp S       &kp T       &kp G           &kp P       &kp N       &kp E       &kp I       &kp A
-                            &kp COMMA   &kp Q       &kp W       &kp D       &kp V           &kp B       &kp H       &kp Z       &kp X       &kp DOT
-                                                    &sl NAV_L   &kp SPACE   &kp ESC         &kp RET     &qs LSHFT   &sl NUM_L
+                &kp Q     &kp J     &kp W     &kp M     &kp APOS        &kp SLASH &kp F     &kp U     &kp Y     &kp X
+                &kp A     &kp R     &kp S     &kp T     &kp G           &kp P     &kp N     &kp E     &kp I     &kp O
+                &kp COMMA &kp L     &kp C     &kp D     &kp V           &kp B     &kp H     &kp Z     &kp K     &kp DOT
+                                    SL(NAV_L) &kp SPACE SK(LSHFT)       SK(RSHFT) &kp BSPC  SL(NUM_L)
             >;
         };
 
         num_layer {
             label = "Num";
             bindings = <
-                            &kp RA(N4)  &kp N7      &kp N8      &kp N9      &kp RA(N5)      &trans      &kp LS(RSHFT) &kp LC(RCTRL) &kp LA(RALT) &kp LG(RGUI)
-                            &kp SLASH   &kp N4      &kp N5      &kp N6      &kp ASTRK       &trans      &sk LSHFT   &sk LCTRL   &sk LALT   &sk LGUI
-                            &kp MINUS   &kp N1      &kp N2      &kp N3      &kp PLUS        &trans      &trans      &trans      &sk RALT    &trans
-                                                    &lt NAV_L DOT &kp N0    &trans          &trans      &trans      &trans
+                &kp SLASH &kp N7    &kp N8    &kp N9    &trans          &trans    &trans    &trans    &trans    &trans
+                &kp MINUS &kp N4    &kp N5    &kp N6    &kp PLUS        &trans    SK(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)
+                &kp EQUAL &kp N1    &kp N2    &kp N3    &kp ASTRK       &trans    SK(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
+                                &lt NAV_L DOT &kp N0    &trans          &trans    &trans    &trans
             >;
         };
 
         nav_layer {
             label = "Nav";
             bindings = <
-                            &kp LG(RGUI) &kp LA(RALT) &kp LC(RCTRL) &kp LS(RSHFT) &trans    &kp PG_UP   &kp HOME    &kp UARW    &kp END    &kp LC(Z)
-                            &sk LGUI    &sk LALT    &sk LCTRL   &sk LSHFT   &trans          &kp PG_DN   &kp LARW    &kp DARW    &kp RARW   &kp LC(LS(Z))
-                            &trans      &sk RALT    &trans      &trans      &trans          &kp LC(C)   &kp ESC     &kp TAB     &kp RET    &kp LS(INS)
-                                                    &trans      &trans      &trans          &trans      &kp BSPC    &lt NUM_L DEL
+                &trans    &trans    &trans    &trans    &trans          &trans    &kp HOME  &kp UARW  &kp END   &kp LC(Z)
+                SK(LGUI)  SK(LALT)  SK(LCTRL) SK(LSHFT) &trans          &kp PG_UP &kp LARW  &kp DARW  &kp RARW  &kp LC(LS(Z))
+                SK(RGUI)  SK(RALT)  SK(RCTRL) SK(RSHFT) &trans          &kp PG_DN &kp ESC   &kp TAB   &kp RET   &kp LS(INS)
+                                    &trans    &trans    &trans          &trans    &kp BSPC  &lt NUM_L DEL
             >;
         };
 
