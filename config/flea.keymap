@@ -3,8 +3,7 @@
  * SPDX-License-Identifier: MIT
  *
  * This is a Colemak 28 keymap for the Flea keyboard.
- * It implements several solutions to the problem of homerow modifiers.
- * Last edited by James White, December 1, 2021.
+ * Last edited by James White, December 6, 2021.
  */
 
 #include <behaviors.dtsi>
@@ -20,22 +19,22 @@
 #define NAV_L 2
 
 &sl {
-    release-after-ms = <1000>;
+    release-after-ms = <5000>;
     quick-release;
 };
 &sk {
-    release-after-ms = <1000>;
+    release-after-ms = <10000>;
 };
 
 / {
     behaviors {
-        nk: not_so_sticky_key {
-            compatible = "zmk,behavior-hold-tap";
-            label = "not so sticky key";
-            #binding-cells = <2>;
-            tapping_term_ms = <200>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&sk>;
+        sq: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            label = "sticky key quick release";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <10000>;
+            quick-release;
         };
         nl: not_so_sticky_layer {
             compatible = "zmk,behavior-hold-tap";
@@ -45,6 +44,22 @@
             flavor = "tap-preferred";
             bindings = <&mo>, <&sl>;
         };
+        nk: not_so_sticky_key {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky key";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&sk>;
+        };
+        nq: not_so_sticky_quick_release {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky quick release";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&sq>;
+        };
         bm: bottom_row_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "bottom row mods";
@@ -53,14 +68,6 @@
             quick_tap_ms = <180>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
-        };
-        sq: sticky_key_quick_release {
-            compatible = "zmk,behavior-sticky-key";
-            label = "sticky key quick release";
-            #binding-cells = <1>;
-            bindings = <&kp>;
-            release-after-ms = <1000>;
-            quick-release;
         };
         f111: f_one_eleven {
             compatible = "zmk,behavior-mod-morph";
@@ -387,20 +394,17 @@
             layers = <0 2>;
             bindings = <&tog NAV_L>;
         };
-        combo_quick_t_shift {
+        combo_cancel_stickies_left {
             timeout-ms = <25>;
-            key-positions = <11 26>;
-            bindings = <&sq LSHFT>;
+            key-positions = <8 9 10 11>;
+            layers = <2>;
+            bindings = <&kp F21>;
         };
-        combo_quick_n_shift {
+        combo_cancel_stickies_right {
             timeout-ms = <25>;
-            key-positions = <14 29>;
-            bindings = <&sq LSHFT>;
-        };
-        combo_caps_word {
-            timeout-ms = <25>;
-            key-positions = <11 14 26 29>;
-            bindings = <&caps_word>;
+            key-positions = <14 15 16 17>;
+            layers = <1>;
+            bindings = <&kp F21>;
         };
         combo_printscreen {
             timeout-ms = <25>;
@@ -411,6 +415,7 @@
 };
 #define SL(KEY) &nl KEY KEY
 #define SK(KEY) &nk KEY KEY
+#define SQ(KEY) &nq KEY KEY
 #define BMG(KEY) &bm LGUI KEY
 #define CAPSWORD &caps_word
 
@@ -431,8 +436,8 @@
             label = "Num";
             bindings = <
                           &kp N7    &kp N8    &kp N9    &kp ASTRK       &trans    CAPSWORD  &trans    &trans
-                &kp MINUS &kp N4    &kp N5    &kp N6    &kp SLASH       &trans    SK(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)
-                &kp PLUS  &kp N1    &kp N2    &kp N3                              SK(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
+                &kp MINUS &kp N4    &kp N5    &kp N6    &kp SLASH       &trans    SQ(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)
+                &kp PLUS  &kp N1    &kp N2    &kp N3                              SQ(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
                                           &lt NAV_L DOT &kp N0          &trans    &trans
             >;
         };
@@ -441,8 +446,8 @@
             label = "Nav";
             bindings = <
                           &trans    &trans    CAPSWORD  &trans          &kp PG_UP &kp HOME  &kp UARW  &kp END
-                SK(LGUI)  SK(LALT)  SK(LCTRL) SK(LSHFT) &trans          &kp PG_DN &kp LARW  &kp DARW  &kp RARW  &kp LC(Z)
-                SK(RGUI)  SK(RALT)  SK(RCTRL) SK(RSHFT)                           &kp ESC   &kp TAB   &kp RET   &kp LS(INS)
+                SK(LGUI)  SK(LALT)  SK(LCTRL) SQ(LSHFT) &trans          &kp PG_DN &kp LARW  &kp DARW  &kp RARW  &kp LC(Z)
+                SK(RGUI)  SK(RALT)  SK(RCTRL) SQ(RSHFT)                           &kp ESC   &kp TAB   &kp RET   &kp LS(INS)
                                               &trans    &trans          &kp BSPC  &lt NUM_L DEL
             >;
         };
