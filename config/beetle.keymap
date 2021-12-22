@@ -2,8 +2,9 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is a Colemak 28 keymap for the Beetle keyboard.
- * Last edited by James White, December 10, 2021.
+ * This is a APTex variant keymap for the Beetle keyboard.
+ * The &bspcdel mod morph does not currently work: https://github.com/zmkfirmware/zmk/issues/683.
+ * Last edited by James White, December 17, 2021.
  */
 
 #include <behaviors.dtsi>
@@ -24,6 +25,9 @@
 };
 &sk {
     release-after-ms = <10000>;
+};
+&caps_word {
+  continue-list = <UNDERSCORE MINUS BACKSPACE>;
 };
 
 / {
@@ -60,7 +64,7 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&sq>;
         };
-        tp: tap_preferred_modtap {
+        tpm: tap_preferred_modtap {
             compatible = "zmk,behavior-hold-tap";
             label = "tap preferred modtap";
             #binding-cells = <2>;
@@ -68,6 +72,13 @@
             quick_tap_ms = <180>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+        };
+        bspcdel: backspace_delete {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BSPC DEL";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DEL>;
+            mods = <(MOD_LSFT)>;
         };
         f113: f_one_thirteen {
             compatible = "zmk,behavior-mod-morph";
@@ -156,12 +167,6 @@
     };
     combos {
         compatible = "zmk,combos";
-        combo_grave {
-            timeout-ms = <25>;
-            key-positions = <1 2>;
-            layers = <0>;
-            bindings = <&kp GRAVE>;
-        };
         combo_left_brace {
             timeout-ms = <25>;
             key-positions = <2 3>;
@@ -173,12 +178,6 @@
             key-positions = <3 4>;
             layers = <0>;
             bindings = <&kp RBRC>;
-        };
-        combo_underscore {
-            timeout-ms = <25>;
-            key-positions = <4 5>;
-            layers = <0>;
-            bindings = <&kp UNDER>;
         };
         combo_left_parenthesis {
             timeout-ms = <25>;
@@ -192,12 +191,6 @@
             layers = <0>;
             bindings = <&kp RPAR>;
         };
-        combo_minus {
-            timeout-ms = <25>;
-            key-positions = <16 17>;
-            layers = <0>;
-            bindings = <&kp MINUS>;
-        };
         combo_left_bracket {
             timeout-ms = <25>;
             key-positions = <25 26>;
@@ -210,53 +203,35 @@
             layers = <0>;
             bindings = <&kp RBKT>;
         };
-        combo_plus {
-            timeout-ms = <25>;
-            key-positions = <6 7>;
-            layers = <0>;
-            bindings = <&kp PLUS>;
-        };
-        combo_semicolon {
+        combo_grave {
             timeout-ms = <25>;
             key-positions = <7 8>;
             layers = <0>;
-            bindings = <&kp SEMI>;
-        };
-        combo_colon {
-            timeout-ms = <25>;
-            key-positions = <8 9>;
-            layers = <0>;
-            bindings = <&kp COLON>;
+            bindings = <&kp GRAVE>;
         };
         combo_backslash {
             timeout-ms = <25>;
-            key-positions = <9 10>;
+            key-positions = <8 9>;
             layers = <0>;
             bindings = <&kp BSLH>;
         };
-        combo_equal {
-            timeout-ms = <25>;
-            key-positions = <18 19>;
-            layers = <0>;
-            bindings = <&kp EQUAL>;
-        };
-        combo_comma {
+        combo_minus {
             timeout-ms = <25>;
             key-positions = <19 20>;
             layers = <0>;
-            bindings = <&kp COMMA>;
+            bindings = <&kp MINUS>;
         };
-        combo_dot {
+        combo_equal {
             timeout-ms = <25>;
             key-positions = <20 21>;
             layers = <0>;
-            bindings = <&kp DOT>;
+            bindings = <&kp EQUAL>;
         };
-        combo_apostrophe {
+        combo_semicolon {
             timeout-ms = <25>;
             key-positions = <28 29>;
             layers = <0>;
-            bindings = <&kp APOS>;
+            bindings = <&kp SEMI>;
         };
         combo_forward_slash {
             timeout-ms = <25>;
@@ -432,6 +407,16 @@
             layers = <1>;
             bindings = <&kp F21>;
         };
+        combo_shift_tab {
+            timeout-ms = <25>;
+            key-positions = <0 12>;
+            bindings = <&kp LS(TAB)>;
+        };
+        combo_delete {
+            timeout-ms = <25>;
+            key-positions = <11 23>;
+            bindings = <&kp DEL>;
+        };
         combo_printscreen {
             timeout-ms = <25>;
             key-positions = <33 34>;
@@ -442,7 +427,7 @@
 #define SL(KEY) &nl KEY KEY
 #define SK(KEY) &nk KEY KEY
 #define SQ(KEY) &nq KEY KEY
-#define TG(KEY) &tp LGUI KEY
+#define TG(KEY) &tpm LGUI KEY
 #define CAPSWORD &caps_word
 
 / {
@@ -451,19 +436,19 @@
 
         default_layer {
             bindings = <
-                &kp ESC   &kp Q     &kp J     &kp W     &kp M     &kp G           &kp P     &kp F     &kp U     &kp Y     &kp X     &kp DEL
-                &kp TAB   &kp A     &kp R     &kp S     &kp T     &kp V           &kp B     &kp N     &kp E     &kp I     &kp O     &kp RET
-                          TG(COMMA) &kp L     &kp C     &kp D                               &kp H     &kp Z     &kp K     TG(DOT)
-                                                        SL(NAV_L) &kp SPACE       &kp BSPC  SL(NUM_L)
+                &kp TAB   &kp Q     &kp W     &kp G     &kp D     &kp K           &kp J     &kp F     &kp O     &kp U     &kp X     &bspcdel
+                SQ(LSHFT) &kp R     &kp S     &kp T     &kp H     &kp V           &kp Y     &kp N     &kp A     &kp I     &kp L     SQ(LSHFT)
+                          TG(Z)     &kp C     &kp M     &kp B                               &kp P     &kp APOS  &kp COMMA TG(DOT)
+                                                        SL(NAV_L) &kp SPACE       &kp E     SL(NUM_L)
             >;
         };
 
         num_layer {
             label = "Num";
             bindings = <
-                &trans    &kp EQUAL &kp N7    &kp N8    &kp N9    &kp ASTRK       &trans    CAPSWORD  &trans    &trans    &trans       &trans
-                &trans    &kp MINUS &kp N4    &kp N5    &kp N6    &kp SLASH       &trans    SQ(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)     &trans
-                          &kp PLUS  &kp N1    &kp N2    &kp N3                              SQ(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
+                &trans    &kp EQUAL &kp N7    &kp N8    &kp N9    &kp ASTRK       &trans    CAPSWORD  &trans    &trans    &trans    &trans
+                &trans    &kp MINUS &kp N4    &kp N5    &kp N6    &kp SLASH       &trans    SK(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)  &kp RET
+                          &kp PLUS  &kp N1    &kp N2    &kp N3                              SK(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
                                                     &lt NAV_L DOT &kp N0          &trans    &trans
             >;
         };
@@ -471,9 +456,9 @@
         nav_layer {
             label = "Nav";
             bindings = <
-                &trans    &trans    &trans    &trans    CAPSWORD  &trans          &kp PG_UP &kp HOME  &kp UARW  &kp END   &kp LC(Z)     &trans
-                &trans    SK(LGUI)  SK(LALT)  SK(LCTRL) SQ(LSHFT) &trans          &kp PG_DN &kp LARW  &kp DARW  &kp RARW  &kp LS(LC(Z)) &trans
-                          SK(RGUI)  SK(RALT)  SK(RCTRL) SQ(RSHFT)                           &kp ESC   &kp TAB   &kp RET   &kp LS(INS)
+                &trans    &trans    &trans    &trans    CAPSWORD  &trans          &kp PG_UP &kp HOME  &kp UARW  &kp END   &kp LS(DEL) &trans
+                &kp ESC   SK(LGUI)  SK(LALT)  SK(LCTRL) SK(LSHFT) &trans          &kp PG_DN &kp LARW  &kp DARW  &kp RARW  &kp LC(INS) &trans
+                          SK(RGUI)  SK(RALT)  SK(RCTRL) SK(RSHFT)                           &kp ESC   &kp TAB   &kp RET   &kp LS(INS)
                                                         &trans    &trans          &kp BSPC  &lt NUM_L DEL
             >;
         };
