@@ -2,8 +2,8 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is a Colemak 28 keymap for the Flea keyboard.
- * Last edited by James White, December 6, 2021.
+ * This is an APTex keymap for the Wasp keyboard.
+ * Last edited by James White, February 10, 2021.
  */
 
 #include <behaviors.dtsi>
