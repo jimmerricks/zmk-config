@@ -1,0 +1,465 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ * SPDX-License-Identifier: MIT
+ *
+ * This is a Colemak 28 keymap for the Gnat keyboard.
+ * Last edited by James White, February 4, 2022.
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+&kscan0 {
+    debounce-period = <10>;
+};
+
+#define DEF_L 0
+#define NUM_L 1
+#define NAV_L 2
+
+&sl {
+    release-after-ms = <5000>;
+    quick-release;
+};
+&sk {
+    release-after-ms = <10000>;
+};
+
+/ {
+    behaviors {
+        sq: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            label = "sticky key quick release";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <10000>;
+            quick-release;
+        };
+        nl: not_so_sticky_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky layer";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&sl>;
+        };
+        nk: not_so_sticky_key {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky key";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&sk>;
+        };
+        nq: not_so_sticky_quick_release {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky quick release";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&sq>;
+        };
+        f111: f_one_eleven {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F1 F11";
+            #binding-cells = <0>;
+            bindings = <&kp F1>, <&kp F11>;
+            mods = <(MOD_RALT)>;
+        };
+        f212: f_two_twelve {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F2 F12";
+            #binding-cells = <0>;
+            bindings = <&kp F2>, <&kp F12>;
+            mods = <(MOD_RALT)>;
+        };
+        f313: f_three_thirteen {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F3 F13";
+            #binding-cells = <0>;
+            bindings = <&kp F3>, <&kp F13>;
+            mods = <(MOD_RALT)>;
+        };
+        f414: f_four_fourteen {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F4 F14";
+            #binding-cells = <0>;
+            bindings = <&kp F4>, <&kp F14>;
+            mods = <(MOD_RALT)>;
+        };
+        f515: f_five_fifteen {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F5 F15";
+            #binding-cells = <0>;
+            bindings = <&kp F5>, <&kp F15>;
+            mods = <(MOD_RALT)>;
+        };
+        f616: f_six_sixteen {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F6 F16";
+            #binding-cells = <0>;
+            bindings = <&kp F6>, <&kp F16>;
+            mods = <(MOD_RALT)>;
+        };
+        f717: f_seven_seventeen {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F7 F17";
+            #binding-cells = <0>;
+            bindings = <&kp F7>, <&kp F17>;
+            mods = <(MOD_RALT)>;
+        };
+        f818: f_eight_eighteen {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F8 F18";
+            #binding-cells = <0>;
+            bindings = <&kp F8>, <&kp F18>;
+            mods = <(MOD_RALT)>;
+        };
+        f919: f_nine_nineteen {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F9 F19";
+            #binding-cells = <0>;
+            bindings = <&kp F9>, <&kp F19>;
+            mods = <(MOD_RALT)>;
+        };
+        f1020: f_ten_twenty {
+            compatible = "zmk,behavior-mod-morph";
+            label = "F10 F20";
+            #binding-cells = <0>;
+            bindings = <&kp F10>, <&kp F20>;
+            mods = <(MOD_RALT)>;
+        };
+    };
+    combos {
+        compatible = "zmk,combos";
+        combo_left_brace {
+            timeout-ms = <25>;
+            key-positions = <1 2>;
+            layers = <0>;
+            bindings = <&kp LBRC>;
+        };
+        combo_right_brace {
+            timeout-ms = <25>;
+            key-positions = <2 3>;
+            layers = <0>;
+            bindings = <&kp RBRC>;
+        };
+        combo_underscore {
+            timeout-ms = <25>;
+            key-positions = <3 4>;
+            layers = <0>;
+            bindings = <&kp UNDER>;
+        };
+        combo_left_parenthesis {
+            timeout-ms = <25>;
+            key-positions = <11 12>;
+            layers = <0>;
+            bindings = <&kp LPAR>;
+        };
+        combo_right_parenthesis {
+            timeout-ms = <25>;
+            key-positions = <12 13>;
+            layers = <0>;
+            bindings = <&kp RPAR>;
+        };
+        combo_minus {
+            timeout-ms = <25>;
+            key-positions = <13 14>;
+            layers = <0>;
+            bindings = <&kp MINUS>;
+        };
+        combo_left_bracket {
+            timeout-ms = <25>;
+            key-positions = <20 21>;
+            layers = <0>;
+            bindings = <&kp LBKT>;
+        };
+        combo_right_bracket {
+            timeout-ms = <25>;
+            key-positions = <21 22>;
+            layers = <0>;
+            bindings = <&kp RBKT>;
+        };
+        combo_grave {
+            timeout-ms = <25>;
+            key-positions = <22 23>;
+            layers = <0>;
+            bindings = <&kp GRAVE>;
+        };
+        combo_plus {
+            timeout-ms = <25>;
+            key-positions = <5 6>;
+            layers = <0>;
+            bindings = <&kp PLUS>;
+        };
+        combo_semicolon {
+            timeout-ms = <25>;
+            key-positions = <6 7>;
+            layers = <0>;
+            bindings = <&kp SEMI>;
+        };
+        combo_colon {
+            timeout-ms = <25>;
+            key-positions = <7 8>;
+            layers = <0>;
+            bindings = <&kp COLON>;
+        };
+        combo_equal {
+            timeout-ms = <25>;
+            key-positions = <15 16>;
+            layers = <0>;
+            bindings = <&kp EQUAL>;
+        };
+        combo_comma {
+            timeout-ms = <25>;
+            key-positions = <16 17>;
+            layers = <0>;
+            bindings = <&kp COMMA>;
+        };
+        combo_dot {
+            timeout-ms = <25>;
+            key-positions = <17 18>;
+            layers = <0>;
+            bindings = <&kp DOT>;
+        };
+        combo_backslash {
+            timeout-ms = <25>;
+            key-positions = <24 25>;
+            layers = <0>;
+            bindings = <&kp BSLH>;
+        };
+        combo_apostrophe {
+            timeout-ms = <25>;
+            key-positions = <25 26>;
+            layers = <0>;
+            bindings = <&kp APOS>;
+        };
+        combo_forward_slash {
+            timeout-ms = <25>;
+            key-positions = <26 27>;
+            layers = <0>;
+            bindings = <&kp SLASH>;
+        };
+        combo_f_one {
+            timeout-ms = <25>;
+            key-positions = <0 10>;
+            layers = <1 2>;
+            bindings = <&f111>;
+        };
+        combo_f_two {
+            timeout-ms = <25>;
+            key-positions = <1 11>;
+            layers = <1 2>;
+            bindings = <&f212>;
+        };
+        combo_f_three {
+            timeout-ms = <25>;
+            key-positions = <2 12>;
+            layers = <1 2>;
+            bindings = <&f313>;
+        };
+        combo_f_four {
+            timeout-ms = <25>;
+            key-positions = <3 13>;
+            layers = <1 2>;
+            bindings = <&f414>;
+        };
+        combo_f_five {
+            timeout-ms = <25>;
+            key-positions = <4 14>;
+            layers = <1 2>;
+            bindings = <&f515>;
+        };
+        combo_f_six {
+            timeout-ms = <25>;
+            key-positions = <5 15>;
+            layers = <1 2>;
+            bindings = <&f616>;
+        };
+        combo_f_seven {
+            timeout-ms = <25>;
+            key-positions = <6 16>;
+            layers = <1 2>;
+            bindings = <&f717>;
+        };
+        combo_f_eight {
+            timeout-ms = <25>;
+            key-positions = <7 17>;
+            layers = <1 2>;
+            bindings = <&f818>;
+        };
+        combo_f_nine {
+            timeout-ms = <25>;
+            key-positions = <8 18>;
+            layers = <1 2>;
+            bindings = <&f919>;
+        };
+        combo_f_ten {
+            timeout-ms = <25>;
+            key-positions = <9 19>;
+            layers = <1 2>;
+            bindings = <&f1020>;
+        };
+        combo_mute {
+            timeout-ms = <25>;
+            key-positions = <11 20>;
+            layers = <1 2>;
+            bindings = <&kp C_MUTE>;
+        };
+        combo_vol_down {
+            timeout-ms = <25>;
+            key-positions = <12 21>;
+            layers = <1 2>;
+            bindings = <&kp C_VOLUME_DOWN>;
+        };
+        combo_vol_up {
+            timeout-ms = <25>;
+            key-positions = <13 22>;
+            layers = <1 2>;
+            bindings = <&kp C_VOLUME_UP>;
+        };
+        combo_media_play_pause {
+            timeout-ms = <25>;
+            key-positions = <16 25>;
+            layers = <1 2>;
+            bindings = <&kp C_PLAY_PAUSE>;
+        };
+        combo_media_prev {
+            timeout-ms = <25>;
+            key-positions = <17 26>;
+            layers = <1 2>;
+            bindings = <&kp C_PREV>;
+        };
+        combo_media_next {
+            timeout-ms = <25>;
+            key-positions = <18 27>;
+            layers = <1 2>;
+            bindings = <&kp C_NEXT>;
+        };
+        combo_cut {
+            timeout-ms = <25>;
+            key-positions = <24 25>;
+            layers = <1 2>;
+            bindings = <&kp LS(DEL)>;
+        };
+        combo_copy {
+            timeout-ms = <25>;
+            key-positions = <25 26>;
+            layers = <1 2>;
+            bindings = <&kp LC(INS)>;
+        };
+        combo_paste {
+            timeout-ms = <25>;
+            key-positions = <26 27>;
+            layers = <1 2>;
+            bindings = <&kp LS(INS)>;
+        };
+        combo_ctl_sft_tab {
+            timeout-ms = <25>;
+            key-positions = <1 2 3>;
+            layers = <0>;
+            bindings = <&kp LC(LS(TAB))>;
+        };
+        combo_alt_sft_tab {
+            timeout-ms = <25>;
+            key-positions = <11 12 13>;
+            layers = <0>;
+            bindings = <&kp LA(LS(TAB))>;
+        };
+        combo_gui_sft_tab {
+            timeout-ms = <25>;
+            key-positions = <20 21 22>;
+            layers = <0>;
+            bindings = <&kp LG(LS(TAB))>;
+        };
+        combo_ctl_tab {
+            timeout-ms = <25>;
+            key-positions = <6 7 8>;
+            layers = <0>;
+            bindings = <&kp LC(TAB)>;
+        };
+        combo_alt_tab {
+            timeout-ms = <25>;
+            key-positions = <16 17 18>;
+            layers = <0>;
+            bindings = <&kp LA(TAB)>;
+        };
+        combo_gui_tab {
+            timeout-ms = <25>;
+            key-positions = <25 26 27>;
+            layers = <0>;
+            bindings = <&kp LG(TAB)>;
+        };
+        combo_toggle_number_layer {
+            timeout-ms = <25>;
+            key-positions = <10 11 12 13>;
+            layers = <0 1>;
+            bindings = <&tog NUM_L>;
+        };
+        combo_toggle_navigation_layer {
+            timeout-ms = <25>;
+            key-positions = <16 17 18 19>;
+            layers = <0 2>;
+            bindings = <&tog NAV_L>;
+        };
+        combo_cancel_stickies_left {
+            timeout-ms = <25>;
+            key-positions = <10 11 12 13>;
+            layers = <2>;
+            bindings = <&kp F21>;
+        };
+        combo_cancel_stickies_right {
+            timeout-ms = <25>;
+            key-positions = <16 17 18 19>;
+            layers = <1>;
+            bindings = <&kp F21>;
+        };
+        combo_printscreen {
+            timeout-ms = <25>;
+            key-positions = <29 30>;
+            bindings = <&kp PSCRN>;
+        };
+    };
+};
+#define SL(KEY) &nl KEY KEY
+#define SK(KEY) &nk KEY KEY
+#define SQ(KEY) &nq KEY KEY
+#define CAPSWORD &caps_word
+#define REPEAT &key_repeat
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+                &kp Q     &kp J     &kp W     &kp M     REPEAT          CAPSWORD  &kp F     &kp U     &kp Y    &kp X
+                &kp A     &kp R     &kp S     &kp T     &kp G           &kp P     &kp N     &kp E     &kp I    &kp O
+                          &kp L     &kp C     &kp D     &kp V           &kp B     &kp H     &kp Z     &kp K
+                                              SL(NAV_L) &kp SPACE       &kp BSPC  SL(NUM_L)
+            >;
+        };
+
+        num_layer {
+            label = "Num";
+            bindings = <
+                &kp MINUS &kp N7    &kp N8    &kp N9    &kp ASTRK       &kp DEL   SQ(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
+                &kp PLUS  &kp N4    &kp N5    &kp N6    &kp SLASH       &kp BSPC  SQ(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)
+                          &kp N1    &kp N2    &kp N3    &trans          &trans    &kp ESC   &kp TAB   &kp RET
+                                          &lt NAV_L DOT &kp N0          &trans    &trans
+            >;
+        };
+
+        nav_layer {
+            label = "Nav";
+            bindings = <
+                SK(RGUI)  SK(RALT)  SK(RCTRL) SQ(RSHFT) &kp DEL         &kp PG_UP &kp HOME  &kp UARW  &kp END   &trans
+                SK(LGUI)  SK(LALT)  SK(LCTRL) SQ(LSHFT) &kp BSPC        &kp PG_DN &kp LARW  &kp DARW  &kp RARW  &kp LC(Z)
+                          &kp ESC   &kp TAB   &kp RET   &trans          &trans    &kp ESC   &kp TAB   &kp RET
+                                              &trans    &trans          &kp BSPC  &lt NUM_L DEL
+            >;
+        };
+
+    };
+};
