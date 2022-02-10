@@ -15,8 +15,8 @@
 };
 
 #define DEF_L 0
-#define NUM_L 1
-#define NAV_L 2
+#define NAV_L 1
+#define NUM_L 2
 
 &sl {
     release-after-ms = <5000>;
@@ -425,30 +425,30 @@
 
         default_layer {
             bindings = <
-                                    &kp J     &kp W     &kp M     &kp SEMI        &kp FSLH  &kp F     &kp U     &kp Y
-                &kp Q     &kp A     &kp R     &kp S     &kp T     &kp G           &kp P     &kp N     &kp E     &kp I     &kp O     &kp X
-                         BMG(COMMA) &kp L     &kp C     &kp D     &kp V           &kp B     &kp H     &kp Z     &kp K     BMG(DOT)
-                                                        SL(NAV_L) &kp SPACE       &kp BSPC  SL(NUM_L)
+                                    &kp W     &kp G     &kp D     &kp B           &kp J     &kp F     &kp O     &kp U
+                &kp FSLH  &kp R     &kp S     &kp T     &kp H     &kp V           &kp Y     &kp N     &kp A     &kp I     &kp L     &kp SEMI
+                          BMG(X)    &kp C     &kp M     &kp K     &kp Q           &kp Z     &kp P     &kp APOS  &kp COMMA BMG(DOT)
+                                                        SL(NUM_L) &kp SPACE       &kp E     SL(NAV_L)
             >;
         };
 
         num_layer {
-            label = "Num";
+            label = "Nav";
             bindings = <
-                                    &kp N7    &kp N8    &kp N9    &kp ASTRK       &trans    CAPSWORD  &trans    &trans
-                &trans    &kp MINUS &kp N4    &kp N5    &kp N6    &kp SLASH       &trans    SQ(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)  &trans
-                          &kp PLUS  &kp N1    &kp N2    &kp N3    &trans          &trans    SQ(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
-                                                    &lt NAV_L DOT &kp N0          &trans    &trans
+                                    &kp HOME  &kp UARW  &kp END   &kp PG_UP       &trans    CAPSWORD  &trans    &trans
+                &kp LC(C) &kp LC(Y) &kp LARW  &kp DARW  &kp RARW  &kp PG_DN       &trans    SQ(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)  &trans
+                          &kp LC(Z) &kp ESC   &kp TAB   &kp RET   &kp LS(INS)     &trans    SQ(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
+                                                    &lt NUM_L DEL &kp BSPC        &trans    &trans
             >;
         };
 
         nav_layer {
-            label = "Nav";
+            label = "Num";
             bindings = <
-                                    &trans    &trans    CAPSWORD  &trans          &kp PG_UP &kp HOME  &kp UARW  &kp END
-                &trans    SK(LGUI)  SK(LALT)  SK(LCTRL) SQ(LSHFT) &trans          &kp PG_DN &kp LARW  &kp DARW  &kp RARW  &kp LC(Z)  &trans
-                          SK(RGUI)  SK(RALT)  SK(RCTRL) SQ(RSHFT) &trans          &trans    &kp ESC   &kp TAB   &kp RET   &kp LS(INS)
-                                                        &trans    &trans          &kp BSPC  &lt NUM_L DEL
+                                    &trans    &trans    CAPSWORD  &trans          &kp ASTRK &kp N7    &kp N8    &kp N9
+                &trans    SK(LGUI)  SK(LALT)  SK(LCTRL) SQ(LSHFT) &trans          &kp SLASH &kp N4    &kp N5    &kp N6    &kp MINUS &trans
+                          SK(RGUI)  SK(RALT)  SK(RCTRL) SQ(RSHFT) &trans          &trans    &kp N1    &kp N2    &kp N3    &kp PLUS
+                                                        &trans    &trans          &kp N0    &lt NAV_L DOT
             >;
         };
 
