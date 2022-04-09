@@ -1,0 +1,290 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ * SPDX-License-Identifier: MIT
+ *
+ * This is a multi-layout keymap for the Ant keyboard.
+ * Last edited by James White, March 31, 2022.
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+&kscan0 {
+    debounce-period = <10>;
+};
+
+#define HDG28_DEF_L 0
+#define HDG28_NUM_L 1
+#define HDG28_NAV_L 2
+#define TRI_L 3
+/ {
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+};
+
+&sl {
+    release-after-ms = <5000>;
+    quick-release;
+};
+&sk {
+    release-after-ms = <10000>;
+};
+
+/ {
+    behaviors {
+        sq: sticky_key_quick_release {
+            compatible = "zmk,behavior-sticky-key";
+            label = "sticky key quick release";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <10000>;
+            quick-release;
+        };
+        nl: not_so_sticky_layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky layer";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&sl>;
+        };
+        nk: not_so_sticky_key {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky key";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&sk>;
+        };
+        nq: not_so_sticky_quick_release {
+            compatible = "zmk,behavior-hold-tap";
+            label = "not so sticky quick release";
+            #binding-cells = <2>;
+            tapping_term_ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&sq>;
+        };
+    };
+    combos {
+        compatible = "zmk,combos";
+        combo_z {
+            timeout-ms = <25>;
+            key-positions = <0 1>;
+            layers = <0>;
+            bindings = <&kp Z>;
+        };
+        combo_j {
+            timeout-ms = <25>;
+            key-positions = <1 2>;
+            layers = <0>;
+            bindings = <&kp J>;
+        };
+        combo_x {
+            timeout-ms = <25>;
+            key-positions = <7 8>;
+            layers = <0>;
+            bindings = <&kp X>;
+        };
+        combo_v {
+            timeout-ms = <25>;
+            key-positions = <8 9>;
+            layers = <0>;
+            bindings = <&kp V>;
+        };
+        combo_k {
+            timeout-ms = <25>;
+            key-positions = <15 16>;
+            layers = <0>;
+            bindings = <&kp K>;
+        };
+        combo_q {
+            timeout-ms = <25>;
+            key-positions = <16 17>;
+            layers = <0>;
+            bindings = <&kp Q>;
+        };
+        combo_grave {
+            timeout-ms = <25>;
+            key-positions = <3 4>;
+            layers = <0>;
+            bindings = <&kp GRAVE>;
+        };
+        combo_backslash {
+            timeout-ms = <25>;
+            key-positions = <4 5>;
+            layers = <0>;
+            bindings = <&kp BSLH>;
+        };
+        combo_apostrophe {
+            timeout-ms = <25>;
+            key-positions = <10 11>;
+            layers = <0>;
+            bindings = <&kp APOS>;
+        };
+        combo_forward_slash {
+            timeout-ms = <25>;
+            key-positions = <11 12>;
+            layers = <0>;
+            bindings = <&kp SLASH>;
+        };
+        combo_minus {
+            timeout-ms = <25>;
+            key-positions = <18 19>;
+            layers = <0>;
+            bindings = <&kp MINUS>;
+        };
+        combo_equal {
+            timeout-ms = <25>;
+            key-positions = <19 20>;
+            layers = <0>;
+            bindings = <&kp EQUAL>;
+        };
+        combo_left_parenthesis {
+            timeout-ms = <25>;
+            key-positions = <1 7 9>;
+            layers = <0>;
+            bindings = <&kp LPAR>;
+        };
+        combo_right_parenthesis {
+            timeout-ms = <25>;
+            key-positions = <4 10 12>;
+            layers = <0>;
+            bindings = <&kp RPAR>;
+        };
+        combo_left_bracket {
+            timeout-ms = <25>;
+            key-positions = <8 15 17>;
+            layers = <0>;
+            bindings = <&kp LBKT>;
+        };
+        combo_right_bracket {
+            timeout-ms = <25>;
+            key-positions = <11 18 20>;
+            layers = <0>;
+            bindings = <&kp RBKT>;
+        };
+        combo_ctl_sft_tab {
+            timeout-ms = <25>;
+            key-positions = <0 1 2>;
+            layers = <0>;
+            bindings = <&kp LC(LS(TAB))>;
+        };
+        combo_alt_sft_tab {
+            timeout-ms = <25>;
+            key-positions = <7 8 9>;
+            layers = <0>;
+            bindings = <&kp LA(LS(TAB))>;
+        };
+        combo_gui_sft_tab {
+            timeout-ms = <25>;
+            key-positions = <15 16 17>;
+            layers = <0>;
+            bindings = <&kp LG(LS(TAB))>;
+        };
+        combo_ctl_tab {
+            timeout-ms = <25>;
+            key-positions = <3 4 5>;
+            layers = <0>;
+            bindings = <&kp LC(TAB)>;
+        };
+        combo_alt_tab {
+            timeout-ms = <25>;
+            key-positions = <10 11 12>;
+            layers = <0>;
+            bindings = <&kp LA(TAB)>;
+        };
+        combo_gui_tab {
+            timeout-ms = <25>;
+            key-positions = <18 19 20>;
+            layers = <0>;
+            bindings = <&kp LG(TAB)>;
+        };
+        combo_toggle_number_layer {
+            timeout-ms = <25>;
+            key-positions = <6 7 8 9>;
+            layers = <0 1>;
+            bindings = <&tog HDG28_NUM_L>;
+        };
+        combo_toggle_navigation_layer {
+            timeout-ms = <25>;
+            key-positions = <10 11 12 13>;
+            layers = <0 2>;
+            bindings = <&tog HDG28_NAV_L>;
+        };
+        combo_cancel_stickies_left {
+            timeout-ms = <25>;
+            key-positions = <6 7 8 9>;
+            layers = <2>;
+            bindings = <&kp F21>;
+        };
+        combo_cancel_stickies_right {
+            timeout-ms = <25>;
+            key-positions = <10 11 12 13>;
+            layers = <1>;
+            bindings = <&kp F21>;
+        };
+        combo_printscreen {
+            timeout-ms = <25>;
+            key-positions = <23 24>;
+            bindings = <&kp PSCRN>;
+        };
+    };
+};
+
+#define SL(KEY) &nl KEY KEY
+#define SK(KEY) &nk KEY KEY
+#define SQ(KEY) &nq KEY KEY
+/* #define CAPSWORD &caps_word */
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        hdg28_default_layer {
+            label = "HDG28_Def";
+            bindings = <
+                          &kp G     &kp M     &kp P           &kp SEMI  &kp COMMA &kp DOT
+                &kp R     &kp S     &kp N     &kp D           &kp E     &kp A     &kp I     &kp H
+                &kp W     &kp F     &kp L     &kp C           &kp U     &kp O     &kp Y     &kp B
+                              SL(HDG28_NAV_L) &kp T           &kp SPACE SL(HDG28_NUM_L)
+            >;
+        };
+
+        hdg28_num_layer {
+            label = "HDG28_Num";
+            bindings = <
+                          &kp N7    &kp N8    &kp N9          &trans    &trans    &trans
+                &trans    &kp N4    &kp N5    &kp N6          SQ(LSHFT) SK(LCTRL) SK(LALT)  SK(LGUI)
+                &trans    &kp N1    &kp N2    &kp N3          SQ(RSHFT) SK(RCTRL) SK(RALT)  SK(RGUI)
+                          &lt HDG28_NAV_L DOT &kp N0          &trans    &trans
+            >;
+        };
+
+        hdg28_nav_layer {
+            label = "HDG28_Nav";
+            bindings = <
+                          &trans    &trans    &trans          &kp HOME  &kp UARW  &kp END
+                SK(LGUI)  SK(LALT)  SK(LCTRL) SQ(LSHFT)       &kp LARW  &kp DARW  &kp RARW  &kp PG_UP
+                SK(RGUI)  SK(RALT)  SK(RCTRL) SQ(RSHFT)       &kp ESC   &kp TAB   &kp RET   &kp PG_DN
+                                    &trans    &trans          &kp BSPC  &lt HDG28_NUM_L DEL
+            >;
+        };
+
+        tri_layer {
+            label = "Trilayer";
+            bindings = <
+                          &trans    &trans    &trans          &trans    &trans    &trans
+                &trans    &trans    &trans    &trans          &trans    &trans    &trans    &trans
+                &trans    &trans    &trans    &trans          &trans    &trans    &trans    &trans
+                                    &trans    &trans          &trans    &trans
+            >;
+        };
+
+    };
+};
