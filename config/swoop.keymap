@@ -29,16 +29,16 @@
     };
 };
 
-&sl {
-    release-after-ms = <100>;
-    /delete-property/ ignore-modifiers;
-    quick-release;
-};
 &sk {
     release-after-ms = <2500>;
     ignore-modifiers;
     /delete-property/ quick-release;
 };
+/* &sl {
+    release-after-ms = <2500>;
+    /delete-property/ ignore-modifiers;
+    quick-release;
+}; */
 
 / {
     behaviors {
@@ -67,14 +67,14 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&sq>;
         };
-        hl: sticky_layer_hold {
+/*      hl: sticky_layer_hold {
             compatible = "zmk,behavior-hold-tap";
             label = "sticky-hold layer";
             #binding-cells = <2>;
             tapping_term_ms = <250>;
-            flavor = "balanced";
+            flavor = "hold-preferred";
             bindings = <&mo>, <&sl>;
-        };
+        }; */
         comsc: comma_semicolon {
             compatible = "zmk,behavior-mod-morph";
             label = "COMMA_SEMICOLON";
@@ -377,7 +377,7 @@
 
 #define HK(keycode) &hk keycode keycode
 #define HQ(keycode) &hq keycode keycode
-#define HL(layer) &hl layer layer
+/*#define HL(layer) &hl layer layer*/
 #define MT_LS_ESC &mt LSHFT ESC
 #define MT_LS_RET &mt LSHFT RET
 #define LT_NM_DEL &lt NUM_L DEL
@@ -399,7 +399,8 @@
                 REPEAT    &kp W     &kp G     &kp D     &kp B           &kp J     &kp F     &kp O     &kp U     REPEAT
                 &kp R     &kp S     &kp T     &kp H     &kp V           &kp Y     &kp N     &kp A     &kp I     &kp L
                 &kp X     &kp C     &kp M     &kp K     &kp Q           &kp Z     &kp P     &kp APOS  &comsc    &dtcol
-                                    MT_LS_ESC HL(NUM_L) &kp SPACE       &kp E     HL(NAV_L) MT_LS_RET
+/*                                  MT_LS_ESC HL(NUM_L) &kp SPACE       &kp E     HL(NAV_L) MT_LS_RET */
+                                    MT_LS_ESC &mo NUM_L &kp SPACE       &kp E     &mo NAV_L MT_LS_RET
             >;
         };
 
