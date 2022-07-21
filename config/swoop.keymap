@@ -394,8 +394,8 @@
         default_layer {
             bindings = <
                 REPEAT    &kp W     &kp G     LHM_RA_D  &kp B           &kp J     RHM_RA_F  &kp O     &kp U     REPEAT
-                LHM_LG_R  LHM_LC_S  LHM_LS_T  LHM_LA_H  &kp V           &kp Y     RHM_LA_N  RHM_RS_A  RHM_RC_I  RHM_RG_L
-                &kp X     &kp C     &kp M     &kp K     &kp Q           &kp Z     &kp P     &kp APOS  &comsc    &dtcol
+                LHM_LG_R  LHM_LC_S  LHM_LS_T  LHM_LA_H  &kp K           &kp P     RHM_LA_N  RHM_RS_A  RHM_RC_I  RHM_RG_L
+                &kp X     &kp C     &kp M     &kp V     &kp Q           &kp Z     &kp Y     &kp APOS  &comsc    &dtcol
                                     &kp LPAR  &mo NUM_L &kp SPACE       &kp E     &mo NAV_L &kp RPAR
             >;
         };
