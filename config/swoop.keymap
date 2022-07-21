@@ -2,8 +2,8 @@
  * Copyright (c) 2020 The ZMK Contributors
  * SPDX-License-Identifier: MIT
  *
- * This is a APTex keymap for the Swoop keyboard.
- * Last edited by James White, June 27, 2022.
+ * This is an APTex keymap for the Swoop keyboard.
+ * Last edited by James White, July 20, 2022.
  */
 
 #include <behaviors.dtsi>
@@ -29,52 +29,30 @@
     };
 };
 
-&sk {
-    release-after-ms = <2500>;
-    ignore-modifiers;
-    /delete-property/ quick-release;
-};
-/* &sl {
-    release-after-ms = <2500>;
-    /delete-property/ ignore-modifiers;
-    quick-release;
-}; */
-
 / {
     behaviors {
-        sq: sticky_key_quick_release {
-            compatible = "zmk,behavior-sticky-key";
-            label = "sticky key quick release";
-            #binding-cells = <1>;
-            bindings = <&kp>;
-            release-after-ms = <2500>;
-            /delete-property/ ignore-modifiers;
-            quick-release;
-        };
-        hk: sticky_hold_key {
+        lhm: left_homerow_mods {
             compatible = "zmk,behavior-hold-tap";
-            label = "sticky-hold key";
+            label = "LEFT_HOMEROW_MODS";
             #binding-cells = <2>;
-            tapping_term_ms = <250>;
+            tapping-term-ms = <240>;
+            quick-tap-ms = <0>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 30 31 32 33 34 35>;
+            global-quick-tap;
             flavor = "tap-preferred";
-            bindings = <&kp>, <&sk>;
+            bindings = <&kp>, <&kp>;
         };
-        hq: sticky_hold_key_quick_release {
+        rhm: right_homerow_mods {
             compatible = "zmk,behavior-hold-tap";
-            label = "sticky-hold key quick release";
+            label = "RIGHT_HOMEROW_MODS";
             #binding-cells = <2>;
-            tapping_term_ms = <250>;
+            tapping-term-ms = <240>;
+            quick-tap-ms = <0>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32 33 34 35>;
+            global-quick-tap;
             flavor = "tap-preferred";
-            bindings = <&kp>, <&sq>;
+            bindings = <&kp>, <&kp>;
         };
-/*      hl: sticky_layer_hold {
-            compatible = "zmk,behavior-hold-tap";
-            label = "sticky-hold layer";
-            #binding-cells = <2>;
-            tapping_term_ms = <250>;
-            flavor = "hold-preferred";
-            bindings = <&mo>, <&sl>;
-        }; */
         comsc: comma_semicolon {
             compatible = "zmk,behavior-mod-morph";
             label = "COMMA_SEMICOLON";
@@ -318,6 +296,18 @@
             layers = <1 2>;
             bindings = <&kp LS(INS)>;
         };
+        combo_quit {
+            timeout-ms = <50>;
+            key-positions = <21 22>;
+            layers = <2>;
+            bindings = <&kp LG(Q)>;
+        };
+        combo_save {
+            timeout-ms = <50>;
+            key-positions = <22 23>;
+            layers = <2>;
+            bindings = <&kp LC(S)>;
+        };
         combo_kwin_rotate {
             timeout-ms = <50>;
             key-positions = <6 7 8>;
@@ -375,20 +365,27 @@
     };
 };
 
-#define HK(keycode) &hk keycode keycode
-#define HQ(keycode) &hq keycode keycode
-/*#define HL(layer) &hl layer layer*/
-#define MT_LS_ESC &mt LSHFT ESC
-#define MT_LS_RET &mt LSHFT RET
+#define LHM_LG_R &lhm LGUI R
+#define LHM_LC_S &lhm LCTL S
+#define LHM_LS_T &lhm LSFT T
+#define LHM_LA_H &lhm LALT H
+#define LHM_RA_D &lhm RALT D
+#define RHM_RA_F &rhm RALT F
+#define RHM_LA_N &rhm LALT N
+#define RHM_RS_A &rhm RSFT A
+#define RHM_RC_I &rhm RCTL I
+#define RHM_RG_L &rhm RGUI L
 #define LT_NM_DEL &lt NUM_L DEL
 #define LT_NV_DOT &lt NAV_L DOT
 #define REPEAT &key_repeat
-#define KP_MUTE &kp C_MUTE
-#define KP_V_UP &kp C_VOLUME_DOWN
-#define KP_V_DN &kp C_VOLUME_UP
-#define KP_M_PP &kp C_PLAY_PAUSE
-#define KP_M_PV &kp C_PREV
-#define KP_M_NX &kp C_NEXT
+#define TOP &kp LC(HOME)
+#define BOTTOM &kp LC(END)
+#define MUTE &kp C_MUTE
+#define VOL_UP &kp C_VOLUME_DOWN
+#define VOL_DN &kp C_VOLUME_UP
+#define MEDIA_PP &kp C_PLAY_PAUSE
+#define MEDIA_PV &kp C_PREV
+#define MEDIA_NX &kp C_NEXT
 
 / {
     keymap {
@@ -396,44 +393,39 @@
 
         default_layer {
             bindings = <
-                REPEAT    &kp W     &kp G     &kp D     &kp B           &kp J     &kp F     &kp O     &kp U     REPEAT
-                &kp R     &kp S     &kp T     &kp H     &kp V           &kp Y     &kp N     &kp A     &kp I     &kp L
+                REPEAT    &kp W     &kp G     LHM_RA_D  &kp B           &kp J     RHM_RA_F  &kp O     &kp U     REPEAT
+                LHM_LG_R  LHM_LC_S  LHM_LS_T  LHM_LA_H  &kp V           &kp Y     RHM_LA_N  RHM_RS_A  RHM_RC_I  RHM_RG_L
                 &kp X     &kp C     &kp M     &kp K     &kp Q           &kp Z     &kp P     &kp APOS  &comsc    &dtcol
-/*                                  MT_LS_ESC HL(NUM_L) &kp SPACE       &kp E     HL(NAV_L) MT_LS_RET */
-                                    MT_LS_ESC &mo NUM_L &kp SPACE       &kp E     &mo NAV_L MT_LS_RET
+                                    &kp LPAR  &mo NUM_L &kp SPACE       &kp E     &mo NAV_L &kp RPAR
             >;
         };
 
         navigation_layer {
-            label = "Nav";
+            label = "Navigation";
             bindings = <
-                &trans    &kp HOME  &kp UARW  &kp END   &kp PG_UP       &kp DEL   HQ(RSHFT) HK(RCTRL) HK(RALT)  HK(RGUI)
-                &trans    &kp LARW  &kp DARW  &kp RARW  &kp PG_DN       &kp BSPC  HQ(LSHFT) HK(LCTRL) HK(LALT)  HK(LGUI)
-/*              &trans    &kp HOME  &kp UARW  &kp END   &kp PG_UP       &kp DEL   &sq RSHFT &sk RCTRL &sk RALT  &sk RGUI */
-/*              &trans    &kp LARW  &kp DARW  &kp RARW  &kp PG_DN       &kp BSPC  &sq LSHFT &sk LCTRL &sk LALT  &sk LGUI */
+                TOP       &kp HOME  &kp UARW  &kp END   &kp PG_UP       &kp DEL   &trans    &trans    &trans    &trans
+                BOTTOM    &kp LARW  &kp DARW  &kp RARW  &kp PG_DN       &kp BSPC  &trans    &trans    &trans    &trans
                 &trans    &kp ESC   &kp TAB   &kp RET   &trans          &trans    &kp ESC   &kp TAB   &kp RET   &trans
                                     &trans    LT_NM_DEL &kp BSPC        &trans    &trans    &trans
             >;
         };
 
         number_layer {
-            label = "Num";
+            label = "Number";
             bindings = <
-                HK(RGUI)  HK(RALT)  HK(RCTRL) HQ(RSHFT) &kp DEL         &kp MINUS &kp N7    &kp N8    &kp N9    &kp ASTRK
-                HK(LGUI)  HK(LALT)  HK(LCTRL) HQ(LSHFT) &kp BSPC        &kp PLUS  &kp N4    &kp N5    &kp N6    &kp SLASH
-/*              &sk RGUI  &sk RALT  &sk RCTRL &sq RSHFT &kp DEL         &kp MINUS &kp N7    &kp N8    &kp N9    &kp ASTRK */
-/*              &sk LGUI  &sk LALT  &sk LCTRL &sq LSHFT &kp BSPC        &kp PLUS  &kp N4    &kp N5    &kp N6    &kp SLASH */
+                &trans    &trans    &trans    &trans    &kp DEL         &kp MINUS &kp N7    &kp N8    &kp N9    &kp ASTRK
+                &trans    &trans    &trans    &trans    &kp BSPC        &kp PLUS  &kp N4    &kp N5    &kp N6    &kp SLASH
                 &trans    &kp ESC   &kp TAB   &kp RET   &trans          &trans    &kp N1    &kp N2    &kp N3    &trans
                                     &trans    &trans    &trans          &kp N0    LT_NV_DOT &trans
             >;
         };
 
         function_layer {
-            label = "Fun";
+            label = "Function";
             bindings = <
                 &trans    &f113     &f214     &f315     &trans          &trans    &f719     &f820     &f921     &trans
                 &trans    &f416     &f517     &f618     &trans          &trans    &f1022    &f1123    &f1224    &trans
-                &trans    KP_MUTE   KP_V_UP   KP_V_DN   &trans          &trans    KP_M_PP   KP_M_PV   KP_M_NX   &trans
+                &trans    MUTE      VOL_UP    VOL_DN    &trans          &trans    MEDIA_PP  MEDIA_PV  MEDIA_NX  &trans
                                     &trans    &trans    &trans          &trans    &trans    &trans
             >;
         };
